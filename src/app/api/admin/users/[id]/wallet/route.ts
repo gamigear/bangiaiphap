@@ -2,9 +2,11 @@ import { NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 
+export const runtime = 'nodejs'
+
 export async function POST(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await auth()
@@ -12,7 +14,7 @@ export async function POST(
             return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
         }
 
-        const userId = params.id
+        const { id: userId } = await params
         const body = await request.json()
         const { amount, type, description } = body
 
@@ -77,4 +79,3 @@ export async function POST(
         return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
     }
 }
-

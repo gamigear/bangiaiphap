@@ -2,9 +2,11 @@ import { NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 
+export const runtime = 'nodejs'
+
 export async function PATCH(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await auth()
@@ -12,11 +14,12 @@ export async function PATCH(
             return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
         }
 
+        const { id } = await params
         const body = await request.json()
         const { categoryId, name, slug, type, description, instructions, order, isActive } = body
 
         const service = await prisma.service.update({
-            where: { id: params.id },
+            where: { id },
             data: {
                 categoryId,
                 name,
@@ -38,7 +41,7 @@ export async function PATCH(
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const session = await auth()
@@ -46,8 +49,9 @@ export async function DELETE(
             return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
         }
 
+        const { id } = await params
         await prisma.service.delete({
-            where: { id: params.id }
+            where: { id }
         })
 
         return NextResponse.json({ success: true, message: 'Deleted successfully' })

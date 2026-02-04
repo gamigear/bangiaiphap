@@ -53,7 +53,7 @@ export async function PATCH(
                 })
 
                 // Refund to wallet
-                const newBalance = Number(order.user.wallet.balance) + amount
+                const newBalance = Number(order.user.wallet!.balance) + amount
                 await tx.wallet.update({
                     where: { userId: order.userId },
                     data: {

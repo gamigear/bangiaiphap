@@ -6,7 +6,7 @@ export const userWallet: UserWallet = {
     balance: 5548,
     totalDeposit: 314282,
     totalSpent: 308734,
-    tier: 'member',
+    tier: 'MEMBER',
 }
 
 // Mock dashboard stats
@@ -14,7 +14,7 @@ export const dashboardStats: DashboardStats = {
     balance: 5548,
     totalDeposit: 314282,
     totalSpent: 308734,
-    tier: 'member',
+    tier: 'MEMBER',
     totalOrders: 156,
     pendingOrders: 3,
     completedOrders: 148,

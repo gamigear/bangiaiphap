@@ -152,7 +152,7 @@ export async function POST(request: Request) {
                     userId: session.user.id,
                     type: 'ORDER',
                     amount: totalPrice,
-                    balance: updatedWallet.balance,
+                    balanceAfter: updatedWallet.balance,
                     description: `Thanh toán đơn hàng ${orderId}: ${server.service.name}`,
                     transactionId: `TXN-ORD-${Date.now()}`,
                     status: 'COMPLETED'
@@ -175,8 +175,8 @@ export async function POST(request: Request) {
             })
 
             // D. Cập nhật tổng chi tiêu của user
-            await tx.user.update({
-                where: { id: session.user.id },
+            await tx.wallet.update({
+                where: { userId: session.user.id },
                 data: {
                     totalSpent: { increment: totalPrice }
                 }
