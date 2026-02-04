@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useMemo } from 'react'
 import { Card, Button, Input, Select, Notification, toast, Skeleton } from '@/components/ui'
 import { TbUpload, TbDownload, TbTrash, TbPlus, TbSend, TbInfoCircle, TbLoader2 } from 'react-icons/tb'

@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useMemo } from 'react'
 import { Card, Button, Input, Select, Skeleton, Notification, toast } from '@/components/ui'
 import { useTransactions, useWallet } from '@/hooks/api'
