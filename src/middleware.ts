@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth'
 
-import authConfig from '@/configs/auth.config'
+import authConfig from '@/configs/auth.edge.config'
 import {
     authRoutes as _authRoutes,
     publicRoutes as _publicRoutes,
